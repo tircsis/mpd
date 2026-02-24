@@ -5,7 +5,7 @@
 <h1 align="center">Materializador de Provas Digitais (MPD)</h1>
 
 <p align="center">
-  [cite_start]<strong>Ferramenta pericial ágil desenvolvida especificamente para viabilizar a coleta, preservação e o enclausuramento de provas digitais com fundamentação jurídica sólida. [cite: 82]</strong>
+  <strong>Aplicativo pericial rápido criado com o objetivo de permitir a obtenção, guarda e empacotamento de evidências eletrônicas com forte base legal.</strong>
 </p>
 
 <p align="center">
@@ -14,43 +14,43 @@
 
 ## 🛡️ Sobre o Projeto
 
-O **MPD** é um software forense "Stand-Alone" focado na captura probatória de evidências em meios digitais. [cite_start]Todo o material coletado via MPD é assegurado utilizando Cadeias de Hash SHA-256 e Timestamps locais[cite: 83]. [cite_start]Isso garante a integridade (comprovando que o arquivo não foi adulterado), o não-repúdio e a conformidade com as resoluções do Superior Tribunal de Justiça (STJ) em processos penais ou administrativos[cite: 7, 83].
+O **MPD** consiste em um sistema forense independente focado na extração de registros em ambientes virtuais. Qualquer evidência obtida pelo aplicativo é protegida por meio de algoritmos de Hash SHA-256 e selos de tempo nativos. Isso certifica a originalidade (mostrando que o documento não sofreu edições), evita a negação de autoria e respeita as exigências dos tribunais superiores para ações penais e administrativas.
 
 ## ✨ Principais Funcionalidades
 
-* [cite_start]**🔒 Cadeia de Custódia Integrada:** Sempre que um print ou vídeo for finalizado, ocorre o cálculo da Hash SHA-256 imediata do arquivo, registrando sua integridade no instante preciso em que ele foi originado da memória[cite: 122].
-* [cite_start]**🚀 Portabilidade Forense:** O executável não requer instalação do software, download de bibliotecas Python ou frameworks externos[cite: 93]. [cite_start]Pode ser executado diretamente de um Pen Drive institucional ou pastas restritas, sem exigir privilégios de Administrador[cite: 94, 95].
-* [cite_start]**🔌 100% Offline e Seguro:** A ferramenta funciona de maneira totalmente offline[cite: 96]. [cite_start]Não envia dados para a web: nenhuma informação dos alvos, senhas, hashes ou mídias são transmitidos a servidores em nuvem[cite: 136].
-* [cite_start]**📸 Captura Híbrida:** * *Screenshot Manual:* Clica e tira uma foto exata da tela no momento[cite: 115].
-  * [cite_start]*Auto Screenshot:* Tira fotos periodicamente a cada 10 segundos automaticamente[cite: 116].
-  * [cite_start]*Gravar Tela (Vídeo):* Inicia a gravação de um arquivo .mp4 fluido com até 20 FPS[cite: 118].
-* [cite_start]**📑 Relatório Técnico Avançado:** O MPD fará o fechamento automático e irá compor e salvar o Relatório Técnico Oficial PDF contendo: Capa, dados do alvo, carimbo de tempo, detalhamento individual de cada prova e suas hashes[cite: 126, 130].
+* **🔒 Cadeia de Custódia Integrada:** Ao concluir o registro de uma tela ou gravação, o sistema calcula imediatamente a assinatura SHA-256 do documento, gravando sua autenticidade no exato momento de sua criação na memória.
+* **🚀 Portabilidade Forense:** O programa não pede instalação, nem necessita baixar pacotes adicionais ou outras dependências. Pode ser aberto direto de um pendrive da corporação ou diretórios limitados, sem precisar de acesso de administrador.
+* **🔌 100% Offline e Seguro:** O uso ocorre inteiramente sem internet. Nenhum detalhe dos investigados, senhas, códigos hash ou arquivos de mídia são enviados para servidores externos.
+* **📸 Captura Híbrida:** * *Registro Manual:* Tira uma fotografia exata do monitor selecionado.
+  * *Registro Automático:* Salva imagens em intervalos regulares de dez segundos.
+  * *Gravação Contínua:* Inicia a captura em vídeo MP4 de toda a ação na tela.
+* **📑 Relatório Técnico Avançado:** Ao final, o sistema estrutura um arquivo fechado e gera um laudo em formato PDF, incluindo capa, informações da investigação, marcação temporal, descrição de cada evidência e suas respectivas assinaturas matemáticas.
 
 ## 🎯 Casos de Uso Comuns
 
-* [cite_start]Registro de ofensas, ameaças ou confissões em redes sociais (WhatsApp Web, Instagram, etc)[cite: 85].
-* [cite_start]Captura de anúncios ou transações financeiras ilícitas[cite: 86].
-* [cite_start]Demonstração técnica de sistemas, logs ou rastreios em tempo real[cite: 87].
-* [cite_start]Materialização de evidências efêmeras (que podem ser apagadas pelo autor a qualquer momento)[cite: 88].
+* Documentação de xingamentos, ameaças ou admissões de culpa em mensageiros e redes sociais.
+* Registro de propagandas enganosas ou movimentações financeiras suspeitas.
+* Exibição técnica de plataformas, registros de atividades ou monitoramentos ao vivo.
+* Salvamento de provas voláteis (aquelas que o infrator pode deletar a qualquer instante).
 
 ## 💻 Como Utilizar
 
-1. [cite_start]**Cabeçalho Institucional:** Informe o Órgão Responsável, o seu Nome (Operador) e carregue a Logo com o brasão da sua instituição[cite: 32].
-2. [cite_start]**Dados da Coleta:** Preencha o "Número do Caso" e o "Alvo/Investigado"[cite: 35]. [cite_start]Clique em "Iniciar Coleta"[cite: 112].
-3. [cite_start]**Capturando Evidências:** Utilize os controles de captura (Manual, Auto ou Vídeo) no rodapé do MPD[cite: 114]. [cite_start]A caixa de eventos exibirá a auditoria em tempo real[cite: 120].
-4. [cite_start]**Finalização:** Clique no botão vermelho "Finalizar Coleta e Gerar Relatório"[cite: 125]. [cite_start]A ferramenta criará uma pasta lacrada nos seus Documentos nomeada com a Data, a Hora e o "Número do Caso" contendo todo o material pericial[cite: 128].
+1. **Cabeçalho Institucional:** Insira o departamento responsável, o nome do agente e anexe a imagem do brasão da corporação.
+2. **Dados da Coleta:** Digite a identificação do procedimento e o nome do alvo. Pressione o botão para iniciar.
+3. **Capturando Evidências:** Escolha as opções de registro (Manual, Automático ou Vídeo) na parte inferior. O painel central mostrará o histórico de ações em tempo real.
+4. **Finalização:** Pressione o botão vermelho de encerramento. O sistema organizará um diretório protegido na pasta de documentos do usuário, contendo todo o material forense gerado.
 
 ## ⚖️ Conformidade e Base Jurídica
 
-[cite_start]A arquitetura do MPD está alinhada à **ISO/IEC 27037:2012**[cite: 55]. [cite_start]Esta é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais[cite: 55]. [cite_start]O processo definido pela norma prioriza a integridade da evidência[cite: 57]. 
+A estrutura técnica respeita os parâmetros da **ISO/IEC 27037:2012**. Trata-se da referência global indispensável que orienta como identificar, recolher, adquirir e proteger evidências cibernéticas. O método prioriza a manutenção da autenticidade do material.
 
-🌍 **Suporte Multidioma:** A ferramenta possui recursos e emite laudos nos idiomas Português, Inglês e Espanhol.
+🌍 **Suporte Multidioma:** O sistema apresenta interface e gera documentos periciais em Português, Inglês e Espanhol.
 
 ## 📥 Instalação / Download
 
-Por ser uma ferramenta portátil, acesse a Landing Page Oficial, faça o download do executável compatível com Windows 10/11 (64-bits) e utilize imediatamente:
+Sendo uma solução portátil, basta acessar o site, baixar a versão executável para Windows (64-bits) e rodar na mesma hora:
 
 👉 **[Download do MPD (Página Oficial)](https://tircsis.github.io/mpd/)**
 
 ---
-[cite_start]*O Software está concebido gratuitamente como prestação de serviço à excelência de investigação penal moderna[cite: 139].*
+*Projeto disponibilizado sem custos, visando contribuir com a modernização e excelência das investigações criminais.*elência de investigação penal moderna.*
