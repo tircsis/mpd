@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPD - Materializador de Provas Digitais</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --danger-color: #ef4444;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .logo {
+            width: 150px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .download-btn:hover {
+            background-color: #059669;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        h2 {
+            color: var(--text-main);
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        .screenshot-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .screenshot {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .iso-badge {
+            background-color: #0f172a;
+            border: 1px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #0a0a0a;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="LOGOIMAGE.jpeg" alt="Logotipo do MPD" class="logo">
+        <h1>Materializador de Provas Digitais (MPD)</h1>
+        <p class="subtitle">Ferramenta pericial ágil desenvolvida especificamente para viabilizar a coleta, preservação e o enclausuramento de provas digitais com fundamentação jurídica sólida.</p>
+        <a href="https://cutt.ly/HtWocn4G" class="download-btn" target="_blank" rel="noopener noreferrer">Download do MPD v1.6</a>
+    </header>
+
+    <div class="container">
+        
+        <div class="grid">
+            <div class="card">
+                <h2>Cadeia de Custódia e Segurança</h2>
+                <ul>
+                    <li>Todo material coletado via MPD é assegurado com cadeias de Hash SHA-256 e timestamps.</li>
+                    <li>Garante a não-repúdio, integridade e conformidade com resoluções do STJ em processos penais ou administrativos.</li>
+                    <li>A ferramenta funciona de maneira totalmente offline.</li>
+                    <li>Não envia dados para a web, garantindo que nenhuma informação dos alvos, senhas ou mídias sejam transmitidos a servidores em nuvem.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Portabilidade Forense</h2>
+                <ul>
+                    <li>Compatível com Sistema Operacional Windows 10 ou Windows 11 (Arquitetura 64-bits).</li>
+                    <li>O executável é do tipo Stand-Alone (Portable).</li>
+                    <li>Não exige instalação do Python, bibliotecas externas ou privilégios de Administrador.</li>
+                    <li>Pode rodar a partir de Pen Drives institucionais ou pastas restritas.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="screenshot-container">
+            <h2>Interface Simples e Direta</h2>
+            <img src="Captura191730.png" alt="Interface do MPD" class="screenshot">
+        </div>
+
+        <div class="card" style="margin-top: 40px;">
+            <h2>Recursos de Captura Híbrida</h2>
+            <ul>
+                <li><strong>Screenshot Manual:</strong> Tira uma foto instantânea da tela escolhida.</li>
+                <li><strong>Auto Screenshot:</strong> Tira fotos periodicamente a cada 10 segundos.</li>
+                <li><strong>Gravar Tela (Vídeo):</strong> Inicia um fluxo de vídeo capturando toda a ação contínua.</li>
+                <li><strong>Relatório Técnico Oficial:</strong> O MPD monta uma estrutura lacrada offline e emite um Relatório Técnico Avançado assinado por Hashes em formato PDF.</li>
+            </ul>
+        </div>
+
+        <div class="iso-badge">
+            <h3 style="color: var(--primary-color); margin-top: 0;">Conformidade com a ISO/IEC 27037:2012</h3>
+            <p style="text-align: left;">A ISO/IEC 27037:2012 é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais. O processo definido pela norma prioriza a integridade da evidência. Através de técnicas como o uso de funções de hash, a norma assegura que se possa provar que a evidência apresentada ao final do processo é exatamente a mesma que foi coletada inicialmente, sem qualquer modificação. O MPD foi desenvolvido seguindo esse rigoroso arcabouço técnico.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Materializador de Provas Digitais (MPD) - O Software está concebido gratuitamente como prestação de serviço à excelência de investigação penal moderna.</p>
+    </footer>
+
+</body>
+</html>
