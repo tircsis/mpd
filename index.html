@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MPD - Materializador de Provas Digitais</title>
+    
+    <title>MPD - Materializador de Provas Digitais | Perícia e Forense Digital</title>
+    <meta name="description" content="O MPD é uma ferramenta pericial ágil e offline para coleta, preservação e enclausuramento de provas digitais (prints e vídeos). Garante validade jurídica com Hash SHA-256 e conformidade com a ISO/IEC 27037:2012.">
+    <meta name="keywords" content="MPD, materializador de provas digitais, prova digital, perícia digital, cadeia de custódia, forense digital, ISO 27037, hash SHA-256, evidências digitais, direito digital, coleta de provas, captura de tela com validade jurídica, preservação de evidências, perícia criminal, investigação cibernética, gravação de tela forense, validade jurídica WhatsApp, STJ provas digitais, laudo pericial digital, autenticação de prints, enclausuramento digital, software forense offline, carimbo de tempo, timestamp pericial">
+    <meta name="author" content="Desenvolvedor do MPD">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://tircsis.github.io/mpd/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MPD - Materializador de Provas Digitais">
+    <meta property="og:description" content="Ferramenta pericial para coleta de provas digitais com fundamentação jurídica sólida e Cadeia de Custódia automatizada.">
+    <meta property="og:image" content="https://tircsis.github.io/mpd/LOGOIMAGE.jpeg">
+    <meta property="og:url" content="https://tircsis.github.io/mpd/">
+
     <style>
         :root {
             --bg-color: #121212;
@@ -24,11 +37,42 @@
             line-height: 1.6;
         }
 
+        /* Seletor de Idiomas no Topo */
+        .lang-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background-color: var(--surface-color);
+            border: 1px solid #333;
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--primary-color);
+        }
+
+        .lang-btn.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            font-weight: bold;
+        }
+
         header {
             background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
             padding: 60px 20px;
             text-align: center;
             border-bottom: 3px solid var(--primary-color);
+            position: relative;
         }
 
         .logo {
@@ -160,66 +204,173 @@
 <body>
 
     <header>
+        <div class="lang-selector">
+            <button class="lang-btn active" onclick="setLanguage('pt')" id="btn-pt">PT 🇧🇷</button>
+            <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN 🇺🇸</button>
+            <button class="lang-btn" onclick="setLanguage('es')" id="btn-es">ES 🇪🇸</button>
+        </div>
+
         <img src="LOGOIMAGE.jpeg" alt="Logotipo do MPD" class="logo">
-        <h1>Materializador de Provas Digitais (MPD)</h1>
-        <p class="subtitle">Ferramenta pericial ágil desenvolvida especificamente para viabilizar a coleta, preservação e o enclausuramento de provas digitais com fundamentação jurídica sólida.</p>
-        <a href="https://cutt.ly/HtWocn4G" class="download-btn" target="_blank" rel="noopener noreferrer">Download do MPD v1.6</a>
+        <h1 data-i18n="main_title">Materializador de Provas Digitais (MPD)</h1>
+        <p class="subtitle" data-i18n="subtitle">Ferramenta pericial ágil desenvolvida especificamente para viabilizar a coleta, preservação e o enclausuramento de provas digitais com fundamentação jurídica sólida.</p>
+        <a href="https://cutt.ly/HtWocn4G" class="download-btn" target="_blank" rel="noopener noreferrer" data-i18n="download_btn">Download do MPD v1.6</a>
     </header>
 
     <div class="container">
-        
         <div class="grid">
             <div class="card">
-                <h2>Cadeia de Custódia e Segurança</h2>
+                <h2 data-i18n="sec1_title">Cadeia de Custódia e Segurança</h2>
                 <ul>
-                    <li>Todo material coletado via MPD é assegurado com cadeias de Hash SHA-256 e timestamps.</li>
-                    <li>Garante a não-repúdio, integridade e conformidade com resoluções do STJ em processos penais ou administrativos.</li>
-                    <li>A ferramenta funciona de maneira totalmente offline.</li>
-                    <li>Não envia dados para a web, garantindo que nenhuma informação dos alvos, senhas ou mídias sejam transmitidos a servidores em nuvem.</li>
+                    <li data-i18n="sec1_li1">Todo material coletado via MPD é assegurado com cadeias de Hash SHA-256 e timestamps.</li>
+                    <li data-i18n="sec1_li2">Garante a não-repúdio, integridade e conformidade com resoluções do STJ em processos penais ou administrativos.</li>
+                    <li data-i18n="sec1_li3">A ferramenta funciona de maneira totalmente offline.</li>
+                    <li data-i18n="sec1_li4">Não envia dados para a web, garantindo que nenhuma informação dos alvos, senhas ou mídias sejam transmitidos a servidores em nuvem.</li>
                 </ul>
             </div>
 
             <div class="card">
-                <h2>Portabilidade Forense</h2>
+                <h2 data-i18n="sec2_title">Portabilidade Forense</h2>
                 <ul>
-                    <li>Compatível com Sistema Operacional Windows 10 ou Windows 11 (Arquitetura 64-bits).</li>
-                    <li>O executável é do tipo Stand-Alone (Portable).</li>
-                    <li>Não exige instalação do Python, bibliotecas externas ou privilégios de Administrador.</li>
-                    <li>Pode rodar a partir de Pen Drives institucionais ou pastas restritas.</li>
+                    <li data-i18n="sec2_li1">Compatível com Sistema Operacional Windows 10 ou Windows 11 (Arquitetura 64-bits).</li>
+                    <li data-i18n="sec2_li2">O executável é do tipo Stand-Alone (Portable).</li>
+                    <li data-i18n="sec2_li3">Não exige instalação do Python, bibliotecas externas ou privilégios de Administrador.</li>
+                    <li data-i18n="sec2_li4">Pode rodar a partir de Pen Drives institucionais ou pastas restritas.</li>
                 </ul>
             </div>
         </div>
 
         <div class="screenshot-container">
-            <h2>Interface Simples e Direta</h2>
+            <h2 data-i18n="sec3_title">Interface Simples e Direta</h2>
             <img src="Captura191730.png" alt="Interface do MPD" class="screenshot">
         </div>
 
         <div class="card" style="margin-top: 40px;">
-            <h2>Recursos de Captura Híbrida</h2>
+            <h2 data-i18n="sec4_title">Recursos de Captura Híbrida</h2>
             <ul>
-                <li><strong>Screenshot Manual:</strong> Tira uma foto instantânea da tela escolhida.</li>
-                <li><strong>Auto Screenshot:</strong> Tira fotos periodicamente a cada 10 segundos.</li>
-                <li><strong>Gravar Tela (Vídeo):</strong> Inicia um fluxo de vídeo capturando toda a ação contínua.</li>
-                <li><strong>Relatório Técnico Oficial:</strong> O MPD monta uma estrutura lacrada offline e emite um Relatório Técnico Avançado assinado por Hashes em formato PDF.</li>
+                <li data-i18n="sec4_li1"><strong>Screenshot Manual:</strong> Tira uma foto instantânea da tela escolhida.</li>
+                <li data-i18n="sec4_li2"><strong>Auto Screenshot:</strong> Tira fotos periodicamente a cada 10 segundos.</li>
+                <li data-i18n="sec4_li3"><strong>Gravar Tela (Vídeo):</strong> Inicia um fluxo de vídeo capturando toda a ação contínua.</li>
+                <li data-i18n="sec4_li4"><strong>Relatório Técnico Oficial:</strong> O MPD monta uma estrutura lacrada offline e emite um Relatório Técnico Avançado assinado por Hashes em formato PDF.</li>
             </ul>
             
             <div class="report-section">
-                <p><strong>Organização e Clareza:</strong> O relatório pericial final é gerado automaticamente em formato <strong>PDF</strong>. Todas as informações coletadas, carimbos de tempo, assinaturas Hash e as capturas de tela são consolidadas e organizadas de maneira estruturada e profissional, prontas para anexação aos autos do processo.</p>
-                <img src="Captura220600.png" alt="Exemplo do Relatório Técnico em PDF" class="screenshot" style="max-width: 90%;">
+                <p data-i18n="sec4_desc"><strong>Organização e Clareza:</strong> O relatório pericial final é gerado automaticamente em formato <strong>PDF</strong>. Todas as informações coletadas, carimbos de tempo, assinaturas Hash e as capturas de tela são consolidadas e organizadas de maneira estruturada e profissional, prontas para anexação aos autos do processo.</p>
+                
+                <p data-i18n="sec4_lang" style="color: var(--secondary-color); font-weight: bold; font-size: 1.1rem; margin-top: 15px; border-top: 1px solid #333; padding-top: 15px;">🌍 Suporte Multidioma: O aplicativo suporta os idiomas Português, Inglês e Espanhol, inclusive gerando o relatório técnico integralmente no idioma selecionado.</p>
+                
+                <img src="Captura220600.png" alt="Exemplo do Relatório Técnico em PDF" class="screenshot" style="max-width: 90%; margin-top: 20px;">
             </div>
         </div>
 
         <div class="iso-badge">
-            <h3 style="color: var(--primary-color); margin-top: 0;">Conformidade com a ISO/IEC 27037:2012</h3>
-            <p style="text-align: left;">A ISO/IEC 27037:2012 é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais. O processo definido pela norma prioriza a integridade da evidência. Através de técnicas como o uso de funções de hash, a norma assegura que se possa provar que a evidência apresentada ao final do processo é exatamente a mesma que foi coletada inicialmente, sem qualquer modificação. O MPD foi desenvolvido seguindo esse rigoroso arcabouço técnico.</p>
+            <h3 style="color: var(--primary-color); margin-top: 0;" data-i18n="iso_title">Conformidade com a ISO/IEC 27037:2012</h3>
+            <p style="text-align: left;" data-i18n="iso_text">A ISO/IEC 27037:2012 é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais. O processo definido pela norma prioriza a integridade da evidência. Através de técnicas como o uso de funções de hash, a norma assegura que se possa provar que a evidência apresentada ao final do processo é exatamente a mesma que foi coletada inicialmente, sem qualquer modificação. O MPD foi desenvolvido seguindo esse rigoroso arcabouço técnico.</p>
         </div>
 
     </div>
 
     <footer>
-        <p>Materializador de Provas Digitais (MPD) - O Software está concebido gratuitamente como prestação de serviço à excelência de investigação penal moderna.</p>
+        <p data-i18n="footer_text">Materializador de Provas Digitais (MPD) - O Software está concebido gratuitamente como prestação de serviço à excelência de investigação penal moderna.</p>
     </footer>
 
+    <script>
+        const translations = {
+            "pt": {
+                "main_title": "Materializador de Provas Digitais (MPD)",
+                "subtitle": "Ferramenta pericial ágil desenvolvida especificamente para viabilizar a coleta, preservação e o enclausuramento de provas digitais com fundamentação jurídica sólida.",
+                "download_btn": "Download do MPD v1.6",
+                "sec1_title": "Cadeia de Custódia e Segurança",
+                "sec1_li1": "Todo material coletado via MPD é assegurado com cadeias de Hash SHA-256 e timestamps.",
+                "sec1_li2": "Garante a não-repúdio, integridade e conformidade com resoluções do STJ em processos penais ou administrativos.",
+                "sec1_li3": "A ferramenta funciona de maneira totalmente offline.",
+                "sec1_li4": "Não envia dados para a web, garantindo que nenhuma informação dos alvos, senhas ou mídias sejam transmitidos a servidores em nuvem.",
+                "sec2_title": "Portabilidade Forense",
+                "sec2_li1": "Compatível com Sistema Operacional Windows 10 ou Windows 11 (Arquitetura 64-bits).",
+                "sec2_li2": "O executável é do tipo Stand-Alone (Portable).",
+                "sec2_li3": "Não exige instalação do Python, bibliotecas externas ou privilégios de Administrador.",
+                "sec2_li4": "Pode rodar a partir de Pen Drives institucionais ou pastas restritas.",
+                "sec3_title": "Interface Simples e Direta",
+                "sec4_title": "Recursos de Captura Híbrida",
+                "sec4_li1": "<strong>Screenshot Manual:</strong> Tira uma foto instantânea da tela escolhida.",
+                "sec4_li2": "<strong>Auto Screenshot:</strong> Tira fotos periodicamente a cada 10 segundos.",
+                "sec4_li3": "<strong>Gravar Tela (Vídeo):</strong> Inicia um fluxo de vídeo capturando toda a ação contínua.",
+                "sec4_li4": "<strong>Relatório Técnico Oficial:</strong> O MPD monta uma estrutura lacrada offline e emite um Relatório Técnico Avançado assinado por Hashes em formato PDF.",
+                "sec4_desc": "<strong>Organização e Clareza:</strong> O relatório pericial final é gerado automaticamente em formato <strong>PDF</strong>. Todas as informações coletadas, carimbos de tempo, assinaturas Hash e as capturas de tela são consolidadas e organizadas de maneira estruturada e profissional, prontas para anexação aos autos do processo.",
+                "sec4_lang": "🌍 Suporte Multidioma: O aplicativo suporta os idiomas Português, Inglês e Espanhol, inclusive gerando o relatório técnico integralmente no idioma selecionado.",
+                "iso_title": "Conformidade com a ISO/IEC 27037:2012",
+                "iso_text": "A ISO/IEC 27037:2012 é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais. O processo definido pela norma prioriza a integridade da evidência. Através de técnicas como o uso de funções de hash, a norma assegura que se possa provar que a evidência apresentada ao final do processo é exatamente a mesma que foi coletada inicialmente, sem qualquer modificação. O MPD foi desenvolvido seguindo esse rigoroso arcabouço técnico.",
+                "footer_text": "Materializador de Provas Digitais (MPD) - O Software está concebido gratuitamente como prestação de serviço à excelência de investigação penal moderna."
+            },
+            "en": {
+                "main_title": "Digital Evidence Materializer (MPD)",
+                "subtitle": "Agile forensic tool specifically developed to enable the collection, preservation, and sealing of digital evidence with solid legal grounding.",
+                "download_btn": "Download MPD v1.6",
+                "sec1_title": "Chain of Custody and Security",
+                "sec1_li1": "All material collected via MPD is secured with SHA-256 Hash chains and timestamps.",
+                "sec1_li2": "Guarantees non-repudiation, integrity, and compliance with legal resolutions in criminal or administrative proceedings.",
+                "sec1_li3": "The tool works completely offline.",
+                "sec1_li4": "Does not send data to the web, ensuring that no target information, passwords, or media are transmitted to cloud servers.",
+                "sec2_title": "Forensic Portability",
+                "sec2_li1": "Compatible with Windows 10 or Windows 11 (64-bit architecture).",
+                "sec2_li2": "The executable is Stand-Alone (Portable).",
+                "sec2_li3": "Does not require Python installation, external libraries, or Administrator privileges.",
+                "sec2_li4": "Can run directly from institutional flash drives or restricted folders.",
+                "sec3_title": "Simple and Direct Interface",
+                "sec4_title": "Hybrid Capture Features",
+                "sec4_li1": "<strong>Manual Screenshot:</strong> Takes an instant photo of the chosen screen.",
+                "sec4_li2": "<strong>Auto Screenshot:</strong> Takes photos periodically every 10 seconds.",
+                "sec4_li3": "<strong>Record Screen (Video):</strong> Starts a continuous video stream capturing all action.",
+                "sec4_li4": "<strong>Official Technical Report:</strong> MPD creates an offline sealed structure and issues an Advanced Technical Report signed by Hashes in PDF format.",
+                "sec4_desc": "<strong>Organization and Clarity:</strong> The final forensic report is automatically generated in <strong>PDF</strong> format. All collected information, timestamps, Hash signatures, and screenshots are consolidated and structured professionally, ready to be attached to legal proceedings.",
+                "sec4_lang": "🌍 Multilingual Support: The application supports Portuguese, English, and Spanish, including generating the full technical report in the selected language.",
+                "iso_title": "Compliance with ISO/IEC 27037:2012",
+                "iso_text": "ISO/IEC 27037:2012 is an essential international standard that establishes guidelines for the identification, collection, acquisition, and preservation of digital evidence. The process defined by the standard prioritizes evidence integrity. Through techniques such as hash functions, the standard ensures that the evidence presented at the end of the process can be proven to be exactly the same as initially collected, without any modification. MPD was developed following this rigorous technical framework.",
+                "footer_text": "Digital Evidence Materializer (MPD) - The software is provided free of charge as a service to modern criminal investigation excellence."
+            },
+            "es": {
+                "main_title": "Materializador de Pruebas Digitales (MPD)",
+                "subtitle": "Herramienta forense ágil desarrollada específicamente para viabilizar la recopilación, preservación y encapsulamiento de pruebas digitales con sólida fundamentación jurídica.",
+                "download_btn": "Descargar MPD v1.6",
+                "sec1_title": "Cadena de Custodia y Seguridad",
+                "sec1_li1": "Todo el material recopilado a través de MPD está asegurado con cadenas Hash SHA-256 y marcas de tiempo.",
+                "sec1_li2": "Garantiza el no repudio, la integridad y el cumplimiento de las resoluciones legales en procesos penales o administrativos.",
+                "sec1_li3": "La herramienta funciona de forma totalmente offline.",
+                "sec1_li4": "No envía datos a la web, garantizando que ninguna información de los objetivos, contraseñas o medios se transmita a servidores en la nube.",
+                "sec2_title": "Portabilidad Forense",
+                "sec2_li1": "Compatible con Windows 10 o Windows 11 (arquitectura de 64 bits).",
+                "sec2_li2": "El ejecutable es Stand-Alone (Portable).",
+                "sec2_li3": "No requiere instalación de Python, bibliotecas externas ni privilegios de Administrador.",
+                "sec2_li4": "Puede ejecutarse directamente desde unidades flash institucionales o carpetas restringidas.",
+                "sec3_title": "Interfaz Simple y Directa",
+                "sec4_title": "Características de Captura Híbrida",
+                "sec4_li1": "<strong>Captura Manual:</strong> Toma una foto instantánea de la pantalla elegida.",
+                "sec4_li2": "<strong>Captura Automática:</strong> Toma fotos periódicamente cada 10 segundos.",
+                "sec4_li3": "<strong>Grabar Pantalla (Video):</strong> Inicia un flujo de video continuo capturando toda la acción.",
+                "sec4_li4": "<strong>Informe Técnico Oficial:</strong> MPD crea una estructura sellada offline y emite un Informe Técnico Avanzado firmado por Hashes en formato PDF.",
+                "sec4_desc": "<strong>Organización y Claridad:</strong> El informe forense final se genera automáticamente en formato <strong>PDF</strong>. Toda la información recopilada, marcas de tiempo, firmas Hash y capturas de pantalla se consolidan de manera estructurada y profesional, listas para anexarse a los expedientes judiciales.",
+                "sec4_lang": "🌍 Soporte Multilingüe: La aplicación soporta los idiomas Portugués, Inglés y Español, incluyendo la generación del informe técnico íntegramente en el idioma seleccionado.",
+                "iso_title": "Cumplimiento de la norma ISO/IEC 27037:2012",
+                "iso_text": "La norma ISO/IEC 27037:2012 es un estándar internacional esencial que establece pautas para la identificación, recopilación, adquisición y preservación de evidencia digital. El proceso definido por la norma prioriza la integridad de la evidencia. A través de técnicas como las funciones hash, la norma asegura que se pueda probar que la evidencia presentada al final del proceso es exactamente la misma que se recopiló inicialmente, sin ninguna modificación. MPD fue desarrollado siguiendo este riguroso marco técnico.",
+                "footer_text": "Materializador de Pruebas Digitales (MPD) - El software se proporciona de forma gratuita como un servicio a la excelencia de la investigación penal moderna."
+            }
+        };
+
+        function setLanguage(lang) {
+            // Atualiza o texto de todos os elementos com o atributo data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Gerencia os botões ativos
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            
+            // Muda a linguagem oficial na tag HTML para SEO dinâmico
+            document.documentElement.lang = lang === 'en' ? 'en-US' : (lang === 'es' ? 'es-ES' : 'pt-BR');
+        }
+    </script>
 </body>
 </html>
