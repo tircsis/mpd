@@ -5,124 +5,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>MPD - Materializador de Provas Digitais | Perícia e Forense Digital</title>
+      <title>MPD - Materializador de Provas Digitais | Perícia e Forense Digital</title>
     <meta name="description" content="O MPD é uma ferramenta pericial ágil e offline para coleta, preservação e enclausuramento de provas digitais (prints e vídeos). Garante validade jurídica com Hash SHA-256 e conformidade com a ISO/IEC 27037:2012.">
-    <meta name="keywords" content="MPD, materializador de provas digitais, prova digital, perícia digital, cadeia de custódia, forense digital, ISO 27037, hash SHA-256, evidências digitais, direito digital, coleta de provas, captura de tela com validade jurídica, preservação de evidências, perícia criminal, investigação cibernética, gravação de tela forense, validade jurídica WhatsApp, STJ provas digitais, laudo pericial digital, autenticação de prints, enclausuramento digital, software forense offline, carimbo de tempo, timestamp pericial, whois, osint, geoip">
+    <meta name="keywords" content="MPD, materializador de provas digitais, prova digital, perícia digital, cadeia de custódia, coletor de provas, forense digital, ISO 27037, hash SHA-256, evidências digitais, direito digital, coleta de provas, captura de tela com validade jurídica, preservação de evidências, perícia criminal, investigação cibernética, gravação de tela forense, validade jurídica WhatsApp, STJ provas digitais, laudo pericial digital, autenticação de prints, enclausuramento digital, software forense offline, carimbo de tempo, timestamp pericial, whois, osint, geoip">
     <meta name="author" content="Desenvolvedor do MPD">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://tircsis.github.io/mpd/">
 
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="MPD - Materializador de Provas Digitais">
-    <meta property="og:description" content="Ferramenta pericial para coleta de provas digitais com fundamentação jurídica sólida e Cadeia de Custódia automatizada.">
-    <meta property="og:image" content="https://tircsis.github.io/mpd/LOGOIMAGE.jpeg">
-    <meta property="og:url" content="https://tircsis.github.io/mpd/">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-color: #121212;
-            --surface-color: #1e1e1e;
-            --primary-color: #3b82f6;
-            --secondary-color: #10b981;
-            --danger-color: #ef4444;
+            --bg-base: #030712; /* Fundo quase preto */
+            --bg-surface: #111827; /* Fundo dos cards */
+            --cyber-cyan: #00f0ff;
+            --cyber-cyan-glow: rgba(0, 240, 255, 0.3);
+            --cyber-green: #00ff66;
+            --cyber-red: #ff003c;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
+            --border-color: #374151;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
             color: var(--text-main);
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            /* Efeito de grade de radar/terminal no fundo */
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
-        /* Seletor de Idiomas no Topo */
+        h1, h2, h3, .terminal-font {
+            font-family: 'Share Tech Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Top Bar & Language Selector */
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 15px 30px;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
         .lang-selector {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             display: flex;
             gap: 10px;
         }
 
         .lang-btn {
-            background-color: var(--surface-color);
-            border: 1px solid #333;
-            color: var(--text-main);
-            padding: 8px 12px;
-            border-radius: 6px;
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 4px;
             cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 0.9rem;
             transition: all 0.3s ease;
         }
 
         .lang-btn:hover {
-            border-color: var(--primary-color);
+            border-color: var(--cyber-cyan);
+            color: var(--cyber-cyan);
+            box-shadow: 0 0 8px var(--cyber-cyan-glow);
         }
 
         .lang-btn.active {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            font-weight: bold;
+            background-color: rgba(0, 240, 255, 0.1);
+            border-color: var(--cyber-cyan);
+            color: var(--cyber-cyan);
+            box-shadow: inset 0 0 10px var(--cyber-cyan-glow);
         }
 
+        /* Header / Hero Section */
         header {
-            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
-            padding: 60px 20px;
+            padding: 80px 20px 60px;
             text-align: center;
-            border-bottom: 3px solid var(--primary-color);
             position: relative;
         }
 
         .logo {
-            width: 150px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
+            width: 140px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px var(--cyber-cyan-glow);
+            margin-bottom: 25px;
+            border: 2px solid var(--cyber-cyan);
         }
 
         h1 {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            color: var(--cyber-cyan);
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px var(--cyber-cyan-glow);
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
-            max-width: 800px;
-            margin: 0 auto 30px auto;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
         }
 
+        /* Cyber Button */
         .download-btn {
             display: inline-block;
-            background-color: var(--secondary-color);
-            color: #ffffff;
-            padding: 15px 35px;
+            background: transparent;
+            color: var(--cyber-green);
+            padding: 15px 40px;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 1.2rem;
-            font-weight: bold;
             text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+            border: 1px solid var(--cyber-green);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 102, 0.4), transparent);
+            transition: all 0.5s ease;
         }
 
         .download-btn:hover {
-            background-color: #059669;
+            background: rgba(0, 255, 102, 0.1);
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.4);
+            transform: translateY(-2px);
         }
 
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Main Container & Layout */
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
         .grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 30px;
+            gap: 25px;
         }
 
         @media (min-width: 768px) {
@@ -131,59 +182,141 @@
             }
         }
 
+        /* Cards / Panels */
         .card {
-            background-color: var(--surface-color);
+            background-color: var(--bg-surface);
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            border-left: 5px solid var(--primary-color);
+            border: 1px solid var(--border-color);
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        h2 {
-            color: var(--text-main);
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
+        /* Canto cortado estilo Cyberpunk */
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--bg-base);
+            border-top-left-radius: 5px;
+            border-left: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .card:hover {
+            border-color: var(--cyber-cyan);
+            box-shadow: 0 8px 30px rgba(0, 240, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .card:hover::after {
+            border-color: var(--cyber-cyan);
+        }
+
+        .card h2 {
+            color: var(--cyber-cyan);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
             margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .card h2::before {
+            content: '>';
+            color: var(--cyber-green);
+            margin-right: 10px;
         }
 
         ul {
-            padding-left: 20px;
+            list-style: none;
+            padding-left: 0;
         }
 
         ul li {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: var(--text-muted);
+            position: relative;
+            padding-left: 20px;
         }
 
-        .screenshot-container {
+        ul li::before {
+            content: '■';
+            color: var(--cyber-cyan);
+            font-size: 0.6em;
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+
+        strong {
+            color: var(--text-main);
+        }
+
+        /* Imagens e Mídia */
+        .media-container {
             text-align: center;
-            margin-top: 40px;
+            margin: 60px 0;
+            padding: 30px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .media-container::before {
+            content: 'SECURE_VIEWPORT';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--bg-base);
+            padding: 0 10px;
+            color: var(--cyber-cyan);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
         }
 
         .screenshot {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
-            border: 1px solid #333;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            transition: border-color 0.3s;
         }
 
-        /* Estilos do Vídeo Thumbnail - Atualizado para ser 40% menor */
+        .media-container:hover .screenshot {
+            border-color: var(--cyber-cyan);
+        }
+
+        /* Vídeo Wrapper modificado para aspecto de vigilância */
         .video-wrapper {
             position: relative;
             display: inline-block;
-            max-width: 480px; /* Reduzido de 800px (800 * 0.6 = 480) */
+            max-width: 600px;
             width: 100%;
-            border-radius: 8px;
+            border: 1px solid #333;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            border: 2px solid #333;
             transition: all 0.3s ease;
         }
 
+        .video-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 240, 255, 0.05) 3px,
+                rgba(0, 240, 255, 0.05) 3px
+            );
+            pointer-events: none;
+        }
+
         .video-wrapper:hover {
-            border-color: var(--danger-color); /* Fica vermelho estilo YouTube ao passar o mouse */
-            transform: scale(1.02);
+            border-color: var(--cyber-red);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.3);
         }
 
         .play-button {
@@ -191,81 +324,93 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(220, 38, 38, 0.85); /* Vermelho translúcido */
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
+            background: rgba(255, 0, 60, 0.8);
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: background 0.3s ease;
+            border-radius: 5px;
+            border: 1px solid var(--cyber-red);
+            transition: all 0.3s ease;
+            z-index: 10;
         }
 
         .video-wrapper:hover .play-button {
-            background: rgba(239, 68, 68, 1);
+            background: var(--cyber-red);
+            box-shadow: 0 0 15px var(--cyber-red);
         }
 
+        /* Relatório Section */
         .report-section {
-            background-color: #171717;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 25px;
-            text-align: center;
-            border: 1px dashed var(--primary-color);
+            background-color: rgba(0, 240, 255, 0.02);
+            padding: 25px;
+            border-left: 3px solid var(--cyber-cyan);
+            margin-top: 30px;
         }
 
         .report-section p {
-            color: #d1d5db;
-            margin-bottom: 20px;
-            font-size: 1.05rem;
+            color: var(--text-muted);
         }
 
+        /* Badge ISO */
         .iso-badge {
-            background-color: #0f172a;
-            border: 1px solid var(--primary-color);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
-            text-align: center;
+            background: linear-gradient(45deg, var(--bg-surface), rgba(0, 255, 102, 0.05));
+            border: 1px solid var(--cyber-green);
+            padding: 30px;
+            text-align: left;
+            margin-top: 50px;
+            position: relative;
         }
 
+        .iso-badge h3 {
+            color: var(--cyber-green);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 30px 20px;
-            background-color: #0a0a0a;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 40px;
+            padding: 40px 20px;
+            background-color: var(--bg-surface);
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            font-family: 'Share Tech Mono', monospace;
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <div class="top-bar">
         <div class="lang-selector">
-            <button class="lang-btn active" onclick="setLanguage('pt')" id="btn-pt">PT 🇧🇷</button>
-            <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN 🇺🇸</button>
-            <button class="lang-btn" onclick="setLanguage('es')" id="btn-es">ES 🇪🇸</button>
+            <button class="lang-btn active" onclick="setLanguage('pt')" id="btn-pt">PT</button>
+            <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</button>
+            <button class="lang-btn" onclick="setLanguage('es')" id="btn-es">ES</button>
         </div>
+    </div>
 
-        <img src="LOGOIMAGE.jpeg" alt="Logotipo do MPD" class="logo">
-        <h1 data-i18n="main_title">Materializador de Provas Digitais (MPD)</h1>
+    <header>
+        <img src="LOGOIMAGE.jpeg" alt="MPD Logo" class="logo">
+        <h1 data-i18n="main_title">Materializador de Provas Digitais - MPD</h1>
         <p class="subtitle" data-i18n="subtitle">Ferramenta pericial ágil desenvolvida especificamente para viabilizar a coleta, preservação e o enclausuramento de provas digitais com fundamentação jurídica sólida.</p>
-        <a href="https://cutt.ly/HtWocn4G" class="download-btn" target="_blank" rel="noopener noreferrer" data-i18n="download_btn">Download do MPD</a>
+        <a href="https://cutt.ly/HtWocn4G" class="download-btn" target="_blank" rel="noopener noreferrer" data-i18n="download_btn">Download MPD</a>
     </header>
 
     <div class="container">
         
-        <div class="screenshot-container" style="margin-top: 10px; margin-bottom: 50px;">
-            <h2 data-i18n="video_title">Vídeo Tutorial de Uso</h2>
-            <p data-i18n="video_desc" style="color: var(--text-muted); margin-bottom: 20px;">Aprenda na prática como configurar e utilizar o MPD para materializar suas provas digitais.</p>
+        <div class="media-container">
+            <h2 data-i18n="video_title" style="color: var(--text-main); margin-top: 0;">Monitoramento Ativo: Video Tutorial</h2>
+            <p data-i18n="video_desc" style="color: var(--text-muted); margin-bottom: 30px;">Aprenda na prática como configurar e utilizar o MPD para materializar suas provas digitais.</p>
             
             <a href="https://youtu.be/MZtECGrD7R8" target="_blank" rel="noopener noreferrer" class="video-wrapper">
-                <img src="https://img.youtube.com/vi/MZtECGrD7R8/maxresdefault.jpg" alt="Miniatura do Vídeo Tutorial do MPD no YouTube" style="width: 100%; display: block;">
-                
+                <img src="https://img.youtube.com/vi/MZtECGrD7R8/maxresdefault.jpg" alt="Miniatura do Vídeo" style="width: 100%; display: block;">
                 <div class="play-button">
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" style="margin-left: 5px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 3l14 9-14 9V3z"/>
                     </svg>
                 </div>
@@ -294,8 +439,8 @@
             </div>
         </div>
 
-        <div class="screenshot-container">
-            <h2 data-i18n="sec3_title">Interface Simples e Direta</h2>
+        <div class="media-container" style="margin-top: 40px;">
+            <h2 data-i18n="sec3_title" style="color: var(--cyber-cyan); margin-top: 0; text-align: left;">Interface de Operação</h2>
             <img src="Captura191730.png" alt="Interface do MPD" class="screenshot" id="interface-img">
         </div>
 
@@ -310,44 +455,51 @@
             
             <div class="report-section">
                 <p data-i18n="sec4_desc"><strong>Organização e Clareza:</strong> O relatório pericial final é gerado automaticamente em formato <strong>PDF</strong>. Todas as informações coletadas, carimbos de tempo, assinaturas Hash e as capturas de tela são consolidadas e organizadas de maneira estruturada e profissional, prontas para anexação aos autos do processo.</p>
+                <p data-i18n="sec4_lang" style="color: var(--cyber-green); font-family: 'Share Tech Mono', monospace;">> SUPORTE MULTIDIOMA DETECTADO: PT | EN | ES</p>
                 
-                <p data-i18n="sec4_lang" style="color: var(--secondary-color); font-weight: bold; font-size: 1.1rem; margin-top: 15px; border-top: 1px solid #333; padding-top: 15px;">🌍 Suporte Multidioma: O aplicativo suporta os idiomas Português, Inglês e Espanhol, inclusive gerando o relatório técnico integralmente no idioma selecionado.</p>
-                
-                <img src="Captura220600.png" alt="Exemplo do Relatório Técnico em PDF" class="screenshot" style="max-width: 90%; margin-top: 20px;">
+                <div style="text-align: center; margin-top: 20px;">
+                    <img src="Captura220600.png" alt="Exemplo do Relatório Técnico em PDF" class="screenshot" style="max-width: 80%;">
+                </div>
             </div>
         </div>
 
-        <div class="card" style="margin-top: 40px;">
-            <h2 data-i18n="sec5_title">Investigação de Infraestrutura (OSINT / Whois)</h2>
-            <p data-i18n="sec5_desc" style="color: var(--text-muted); margin-bottom: 20px;">A aplicação MPD realiza também a coleta de dados da página investigada fazendo uma varredura profunda de dados para crimes virtuais hospedados em URLs específicas públicas (páginas abertas web).</p>
+        <div class="card" style="margin-top: 40px; border-color: var(--cyber-red);">
+            <h2 data-i18n="sec5_title" style="color: var(--cyber-red); border-bottom-color: rgba(255,0,60,0.3);">Investigação de Infraestrutura (OSINT / Whois)</h2>
+            <p data-i18n="sec5_desc" style="color: var(--text-muted); margin-bottom: 20px;">A aplicação MPD realiza também a coleta de dados da página investigada fazendo uma varredura profunda de dados para crimes virtuais hospedados em URLs específicas públicas.</p>
             <ul>
-                <li data-i18n="sec5_li1"><strong>Internet Protocol (IP) Whois:</strong> Extrai a malha da rede buscando blocos (CIDR), Sistema Autônomo (ASN), nome oficial da Empresa Provedora de Hospedagem (ISP) e especificamente os contatos de <em>Abuse Email</em> das empresas para o envio de representações de quebra de sigilo por ofício.</li>
-                <li data-i18n="sec5_li2"><strong>Mapeamento Geográfico (Dashboard Geo IP):</strong> Coleta as coordenadas (Latitude/Longitude) do provedor associadas pela API e abre momentaneamente um <em>Dashboard Geográfico (Mapa Gráfico)</em> na tela, que extrairá do seu próprio ambiente um novo print técnico mostrando o "Pino" da cidade-sede para fins ilustrativos da localização do registro.</li>
-                <li data-i18n="sec5_li3"><strong>Código Fonte Estrito:</strong> O MPD entra na página ignorando JavaScript visual dinâmico e salva todo o esqueleto bruto raiz HTML em arquivos de texto criptografados, fixando tags e links obscuros da página caso os criminosos tentem excluir futuramente.</li>
+                <li data-i18n="sec5_li1"><strong>IP Whois:</strong> Extrai blocos (CIDR), ASN, ISP e contatos de <em>Abuse Email</em> para ofícios de quebra de sigilo.</li>
+                <li data-i18n="sec5_li2"><strong>Mapeamento Geográfico (Geo IP):</strong> Coleta coordenadas da API e extrai print técnico do Dashboard ilustrando a localização do registro.</li>
+                <li data-i18n="sec5_li3"><strong>Código Fonte Estrito:</strong> Salva o esqueleto HTML bruto em arquivos de texto, fixando tags e links caso os criminosos tentem excluir futuramente.</li>
             </ul>
-            <div class="screenshot-container" style="margin-top: 25px;">
-                <img src="dash_map_1772040835.png" alt="Dashboard Geo IP e OSINT do MPD" class="screenshot" style="border: 1px solid var(--primary-color);">
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <img src="dash_map_1772040835.png" alt="Dashboard Geo IP" class="screenshot" style="border-color: var(--cyber-red);">
             </div>
         </div>
 
         <div class="iso-badge">
-            <h3 style="color: var(--primary-color); margin-top: 0;" data-i18n="iso_title">Conformidade com a ISO/IEC 27037:2012</h3>
-            <p style="text-align: left;" data-i18n="iso_text">A ISO/IEC 27037:2012 é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais. O processo definido pela norma prioriza a integridade da evidência. Através de técnicas como o uso de funções de hash, a norma assegura que se possa provar que a evidência apresentada ao final do processo é exatamente a mesma que foi coletada inicialmente, sem qualquer modificação. O MPD foi desenvolvido seguindo esse rigoroso arcabouço técnico.</p>
+            <h3 data-i18n="iso_title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Conformidade com a ISO/IEC 27037:2012
+            </h3>
+            <p data-i18n="iso_text" style="color: var(--text-muted); font-size: 0.95rem;">A ISO/IEC 27037:2012 é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais. O processo prioriza a integridade da evidência através de funções de hash, assegurando que se possa provar que a evidência apresentada ao final é exatamente a mesma coletada inicialmente. O MPD foi desenvolvido seguindo esse rigoroso arcabouço técnico.</p>
         </div>
 
     </div>
 
     <footer>
-        <p data-i18n="footer_text">Materializador de Provas Digitais (MPD) - O Software está concebido gratuitamente como prestação de serviço à excelência de investigação penal moderna.</p>
+        <p data-i18n="footer_text">SYS.LOG: Materializador de Provas Digitais - MPD - Software concebido gratuitamente como prestação de serviço à excelência de investigação penal.</p>
+        <p style="opacity: 0.5; margin-top: 10px;">EOF</p>
     </footer>
 
     <script>
+        // Lógica de Tradução Mantida
         const translations = {
             "pt": {
-                "main_title": "Materializador de Provas Digitais (MPD)",
+                "main_title": "Materializador de Provas Digitais - MPD",
                 "subtitle": "Ferramenta pericial ágil desenvolvida especificamente para viabilizar a coleta, preservação e o enclausuramento de provas digitais com fundamentação jurídica sólida.",
-                "download_btn": "Download do MPD v1.6",
-                "video_title": "Vídeo Tutorial de Uso",
+                "download_btn": "Download MPD",
+                "video_title": "Monitoramento Ativo: Video Tutorial",
                 "video_desc": "Aprenda na prática como configurar e utilizar o MPD para materializar suas provas digitais.",
                 "sec1_title": "Cadeia de Custódia e Segurança",
                 "sec1_li1": "Todo material coletado via MPD é assegurado com cadeias de Hash SHA-256 e timestamps.",
@@ -359,92 +511,91 @@
                 "sec2_li2": "O executável é do tipo Stand-Alone (Portable).",
                 "sec2_li3": "Não exige instalação do Python, bibliotecas externas ou privilégios de Administrador.",
                 "sec2_li4": "Pode rodar a partir de Pen Drives institucionais ou pastas restritas.",
-                "sec3_title": "Interface Simples e Direta",
+                "sec3_title": "Interface de Operação",
                 "sec4_title": "Recursos de Captura Híbrida",
                 "sec4_li1": "<strong>Screenshot Manual:</strong> Tira uma foto instantânea da tela escolhida.",
                 "sec4_li2": "<strong>Auto Screenshot:</strong> Tira fotos periodicamente a cada 10 segundos.",
                 "sec4_li3": "<strong>Gravar Tela (Vídeo):</strong> Inicia um fluxo de vídeo capturando toda a ação contínua.",
                 "sec4_li4": "<strong>Relatório Técnico Oficial:</strong> O MPD monta uma estrutura lacrada offline e emite um Relatório Técnico Avançado assinado por Hashes em formato PDF.",
                 "sec4_desc": "<strong>Organização e Clareza:</strong> O relatório pericial final é gerado automaticamente em formato <strong>PDF</strong>. Todas as informações coletadas, carimbos de tempo, assinaturas Hash e as capturas de tela são consolidadas e organizadas de maneira estruturada e profissional, prontas para anexação aos autos do processo.",
-                "sec4_lang": "🌍 Suporte Multidioma: O aplicativo suporta os idiomas Português, Inglês e Espanhol, inclusive gerando o relatório técnico integralmente no idioma selecionado.",
+                "sec4_lang": "> SUPORTE MULTIDIOMA DETECTADO: PT | EN | ES",
                 "sec5_title": "Investigação de Infraestrutura (OSINT / Whois)",
-                "sec5_desc": "A aplicação MPD realiza também a coleta de dados da página investigada fazendo uma varredura profunda de dados para crimes virtuais hospedados em URLs específicas públicas (páginas abertas web).",
-                "sec5_li1": "<strong>Internet Protocol (IP) Whois:</strong> Extrai a malha da rede buscando blocos (CIDR), Sistema Autônomo (ASN), nome oficial da Empresa Provedora de Hospedagem (ISP) e especificamente os contatos de <em>Abuse Email</em> das empresas para o envio de representações de quebra de sigilo por ofício.",
-                "sec5_li2": "<strong>Mapeamento Geográfico (Dashboard Geo IP):</strong> Coleta as coordenadas (Latitude/Longitude) do provedor associadas pela API e abre momentaneamente um <em>Dashboard Geográfico (Mapa Gráfico)</em> na tela, que extrairá do seu próprio ambiente um novo print técnico mostrando o \"Pino\" da cidade-sede para fins ilustrativos da localização do registro.",
-                "sec5_li3": "<strong>Código Fonte Estrito:</strong> O MPD entra na página ignorando JavaScript visual dinâmico e salva todo o esqueleto bruto raiz HTML em arquivos de texto criptografados, fixando tags e links obscuros da página caso os criminosos tentem excluir futuramente.",
+                "sec5_desc": "A aplicação MPD realiza também a coleta de dados da página investigada fazendo uma varredura profunda de dados para crimes virtuais hospedados em URLs específicas públicas.",
+                "sec5_li1": "<strong>IP Whois:</strong> Extrai blocos (CIDR), ASN, ISP e contatos de <em>Abuse Email</em> para ofícios de quebra de sigilo.",
+                "sec5_li2": "<strong>Mapeamento Geográfico (Geo IP):</strong> Coleta coordenadas da API e extrai print técnico do Dashboard ilustrando a localização do registro.",
+                "sec5_li3": "<strong>Código Fonte Estrito:</strong> Salva o esqueleto HTML bruto em arquivos de texto, fixando tags e links caso os criminosos tentem excluir futuramente.",
                 "iso_title": "Conformidade com a ISO/IEC 27037:2012",
-                "iso_text": "A ISO/IEC 27037:2012 é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais. O processo definido pela norma prioriza a integridade da evidência. Através de técnicas como o uso de funções de hash, a norma assegura que se possa provar que a evidência apresentada ao final do processo é exatamente a mesma que foi coletada inicialmente, sem qualquer modificação. O MPD foi desenvolvido seguindo esse rigoroso arcabouço técnico.",
-                "footer_text": "Materializador de Provas Digitais (MPD) - O Software está concebido gratuitamente como prestação de serviço à excelência de investigação penal moderna."
+                "iso_text": "A ISO/IEC 27037:2012 é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais. O processo prioriza a integridade da evidência através de funções de hash, assegurando que se possa provar que a evidência apresentada ao final é exatamente a mesma coletada inicialmente. O MPD foi desenvolvido seguindo esse rigoroso arcabouço técnico.",
+                "footer_text": "SYS.LOG: Materializador de Provas Digitais -MPD - Software concebido gratuitamente como prestação de serviço à excelência de investigação penal."
             },
             "en": {
-                "main_title": "Digital Evidence Materializer (MPD)",
+                "main_title": "Digital Evidence Materializer - MPD",
                 "subtitle": "Agile forensic tool specifically developed to enable the collection, preservation, and sealing of digital evidence with solid legal grounding.",
-                "download_btn": "Download MPD v1.6",
-                "video_title": "Video Tutorial",
+                "download_btn": "Download MPD",
+                "video_title": "Active Monitoring: Video Tutorial",
                 "video_desc": "Learn practically how to configure and use MPD to materialize your digital evidence.",
                 "sec1_title": "Chain of Custody and Security",
                 "sec1_li1": "All material collected via MPD is secured with SHA-256 Hash chains and timestamps.",
-                "sec1_li2": "Guarantees non-repudiation, integrity, and compliance with legal resolutions in criminal or administrative proceedings.",
+                "sec1_li2": "Guarantees non-repudiation, integrity, and compliance with legal resolutions in proceedings.",
                 "sec1_li3": "The tool works completely offline.",
-                "sec1_li4": "Does not send data to the web, ensuring that no target information, passwords, or media are transmitted to cloud servers.",
+                "sec1_li4": "Does not send data to the web, ensuring no target info or media is transmitted to cloud servers.",
                 "sec2_title": "Forensic Portability",
                 "sec2_li1": "Compatible with Windows 10 or Windows 11 (64-bit architecture).",
                 "sec2_li2": "The executable is Stand-Alone (Portable).",
-                "sec2_li3": "Does not require Python installation, external libraries, or Administrator privileges.",
+                "sec2_li3": "Does not require Python installation, external libraries, or Admin privileges.",
                 "sec2_li4": "Can run directly from institutional flash drives or restricted folders.",
-                "sec3_title": "Simple and Direct Interface",
+                "sec3_title": "Operation Interface",
                 "sec4_title": "Hybrid Capture Features",
                 "sec4_li1": "<strong>Manual Screenshot:</strong> Takes an instant photo of the chosen screen.",
                 "sec4_li2": "<strong>Auto Screenshot:</strong> Takes photos periodically every 10 seconds.",
                 "sec4_li3": "<strong>Record Screen (Video):</strong> Starts a continuous video stream capturing all action.",
                 "sec4_li4": "<strong>Official Technical Report:</strong> MPD creates an offline sealed structure and issues an Advanced Technical Report signed by Hashes in PDF format.",
-                "sec4_desc": "<strong>Organization and Clarity:</strong> The final forensic report is automatically generated in <strong>PDF</strong> format. All collected information, timestamps, Hash signatures, and screenshots are consolidated and structured professionally, ready to be attached to legal proceedings.",
-                "sec4_lang": "🌍 Multilingual Support: The application supports Portuguese, English, and Spanish, including generating the full technical report in the selected language.",
+                "sec4_desc": "<strong>Organization and Clarity:</strong> The final forensic report is automatically generated in <strong>PDF</strong>. All collected info, timestamps, Hashes, and screenshots are consolidated professionally, ready for legal attachment.",
+                "sec4_lang": "> MULTILINGUAL SUPPORT DETECTED: PT | EN | ES",
                 "sec5_title": "Infrastructure Investigation (OSINT / Whois)",
-                "sec5_desc": "The MPD application also collects data from the investigated page, conducting a deep data sweep for cybercrimes hosted on specific public URLs (open web pages).",
-                "sec5_li1": "<strong>Internet Protocol (IP) Whois:</strong> Extracts the network mesh searching for blocks (CIDR), Autonomous System (ASN), official name of the Hosting Provider Company (ISP), and specifically the <em>Abuse Email</em> contacts of the companies for sending official breach of confidentiality requests.",
-                "sec5_li2": "<strong>Geographic Mapping (Geo IP Dashboard):</strong> Collects the provider's coordinates (Latitude/Longitude) associated by the API and briefly opens a <em>Geographic Dashboard (Graphic Map)</em> on the screen, which extracts a new technical print from its own environment showing the \"Pin\" of the headquarters city for illustrative purposes of the registration location.",
-                "sec5_li3": "<strong>Strict Source Code:</strong> The MPD accesses the page ignoring dynamic visual JavaScript and saves the entire raw root HTML skeleton in encrypted text files, pinning obscure tags and links from the page in case criminals attempt to delete them later.",
+                "sec5_desc": "The MPD app also conducts a deep data sweep for cybercrimes hosted on specific public URLs.",
+                "sec5_li1": "<strong>IP Whois:</strong> Extracts CIDR, ASN, ISP, and <em>Abuse Email</em> contacts for official requests.",
+                "sec5_li2": "<strong>Geo IP Mapping:</strong> Collects API coordinates and extracts a dashboard print showing the location.",
+                "sec5_li3": "<strong>Strict Source Code:</strong> Saves the raw HTML skeleton in text files, pinning obscure tags/links in case of deletion.",
                 "iso_title": "Compliance with ISO/IEC 27037:2012",
-                "iso_text": "ISO/IEC 27037:2012 is an essential international standard that establishes guidelines for the identification, collection, acquisition, and preservation of digital evidence. The process defined by the standard prioritizes evidence integrity. Through techniques such as hash functions, the standard ensures that the evidence presented at the end of the process can be proven to be exactly the same as initially collected, without any modification. MPD was developed following this rigorous technical framework.",
-                "footer_text": "Digital Evidence Materializer (MPD) - The software is provided free of charge as a service to modern criminal investigation excellence."
+                "iso_text": "ISO/IEC 27037:2012 is an essential standard that establishes guidelines for digital evidence. The process prioritizes integrity through hash functions, ensuring evidence presented is exactly the same as collected. MPD follows this rigorous technical framework.",
+                "footer_text": "SYS.LOG: Digital Evidence Materializer - MPD - Provided free of charge as a service to criminal investigation excellence."
             },
             "es": {
-                "main_title": "Materializador de Pruebas Digitales (MPD)",
-                "subtitle": "Herramienta forense ágil desarrollada específicamente para viabilizar la recopilación, preservación y encapsulamiento de pruebas digitales con sólida fundamentación jurídica.",
+                "main_title": "Materializador de Pruebas Digitales - MPD",
+                "subtitle": "Herramienta forense ágil desarrollada para viabilizar la recopilación, preservación y encapsulamiento de pruebas digitales con fundamentación jurídica.",
                 "download_btn": "Descargar MPD v1.6",
-                "video_title": "Video Tutorial de Uso",
-                "video_desc": "Aprenda en la práctica cómo configurar y utilizar el MPD para materializar suas provas digitais.",
+                "video_title": "Monitoreo Activo: Video Tutorial",
+                "video_desc": "Aprenda en la práctica cómo configurar y utilizar el MPD para materializar sus pruebas.",
                 "sec1_title": "Cadena de Custodia y Seguridad",
-                "sec1_li1": "Todo el material recopilado a través de MPD está asegurado con cadenas Hash SHA-256 y marcas de tiempo.",
-                "sec1_li2": "Garantiza el no repudio, la integridad y el cumplimiento de las resoluciones legales en procesos penales o administrativos.",
+                "sec1_li1": "Todo el material recopilado está asegurado con cadenas Hash SHA-256 y marcas de tiempo.",
+                "sec1_li2": "Garantiza el no repudio, integridad y cumplimiento de resoluciones legales en procesos.",
                 "sec1_li3": "La herramienta funciona de forma totalmente offline.",
-                "sec1_li4": "No envía datos a la web, garantizando que ninguna información de los objetivos, contraseñas o medios se transmita a servidores en la nube.",
+                "sec1_li4": "No envía datos a la web, garantizando que ninguna información se transmita a la nube.",
                 "sec2_title": "Portabilidad Forense",
-                "sec2_li1": "Compatible con Windows 10 o Windows 11 (arquitectura de 64 bits).",
+                "sec2_li1": "Compatible con Windows 10 o Windows 11 (arquitectura 64 bits).",
                 "sec2_li2": "El ejecutable es Stand-Alone (Portable).",
                 "sec2_li3": "No requiere instalación de Python, bibliotecas externas ni privilegios de Administrador.",
-                "sec2_li4": "Puede ejecutarse directamente desde unidades flash institucionales o carpetas restringidas.",
-                "sec3_title": "Interfaz Simple y Directa",
+                "sec2_li4": "Puede ejecutarse desde unidades flash institucionales.",
+                "sec3_title": "Interfaz de Operación",
                 "sec4_title": "Características de Captura Híbrida",
-                "sec4_li1": "<strong>Captura Manual:</strong> Toma una foto instantánea de la pantalla elegida.",
+                "sec4_li1": "<strong>Captura Manual:</strong> Toma una foto instantánea de la pantalla.",
                 "sec4_li2": "<strong>Captura Automática:</strong> Toma fotos periódicamente cada 10 segundos.",
-                "sec4_li3": "<strong>Grabar Pantalla (Video):</strong> Inicia un flujo de video continuo capturando toda la acción.",
-                "sec4_li4": "<strong>Informe Técnico Oficial:</strong> MPD crea una estructura sellada offline y emite un Informe Técnico Avanzado firmado por Hashes en formato PDF.",
-                "sec4_desc": "<strong>Organización y Claridad:</strong> El informe forense final se genera automáticamente en formato <strong>PDF</strong>. Toda la información recopilada, marcas de tiempo, firmas Hash y capturas de pantalla se consolidan de manera estructurada y profesional, listas para anexarse a los expedientes judiciales.",
-                "sec4_lang": "🌍 Soporte Multilingüe: La aplicación soporta los idiomas Portugués, Inglés y Español, incluyendo la generación del informe técnico íntegramente en el idioma seleccionado.",
+                "sec4_li3": "<strong>Grabar Pantalla (Video):</strong> Inicia un flujo de video continuo.",
+                "sec4_li4": "<strong>Informe Técnico Oficial:</strong> MPD crea una estructura sellada offline y emite un Informe Técnico firmado por Hashes en PDF.",
+                "sec4_desc": "<strong>Organización y Claridad:</strong> El informe forense final se genera automáticamente en <strong>PDF</strong>. Toda la información, marcas de tiempo, firmas Hash y capturas se consolidan profesionalmente.",
+                "sec4_lang": "> SOPORTE MULTILINGÜE DETECTADO: PT | EN | ES",
                 "sec5_title": "Investigación de Infraestructura (OSINT / Whois)",
-                "sec5_desc": "La aplicación MPD también realiza la recopilación de datos de la página investigada mediante un barrido profundo de datos para delitos cibernéticos alojados en URL públicas específicas (páginas web abiertas).",
-                "sec5_li1": "<strong>Internet Protocol (IP) Whois:</strong> Extrae la malla de red buscando blocs (CIDR), Sistema Autónomo (ASN), nombre oficial de la Empresa Proveedora de Alojamiento (ISP) y específicamente los contactos de <em>Abuse Email</em> de las empresas para el envío de representaciones de levantamiento de secreto por oficio.",
-                "sec5_li2": "<strong>Mapeo Geográfico (Dashboard Geo IP):</strong> Recopila las coordenadas (Latitud/Longitud) del proveedor asociadas por la API y abre momentáneamente un <em>Dashboard Geográfico (Mapa Gráfico)</em> en la pantalla, que extraerá de su propio entorno una nueva impresión técnica que muestra el \"Pin\" de la ciudad sede con fines ilustrativos de la ubicación del registro.",
-                "sec5_li3": "<strong>Código Fuente Estricto:</strong> El MPD ingresa a la página ignorando el JavaScript visual dinámico y guarda todo el esqueleto raíz HTML sin procesar en archivos de texto encriptados, fijando etiquetas y enlaces oscuros de la página en caso de que los delincuentes intenten eliminarlos en el futuro.",
-                "iso_title": "Cumplimiento de la norma ISO/IEC 27037:2012",
-                "iso_text": "La norma ISO/IEC 27037:2012 es un estándar internacional esencial que establece pautas para la identificación, recopilación, adquisición y preservación de evidencia digital. El proceso definido por la norma prioriza la integridad de la evidencia. A través de técnicas como las funciones hash, la norma asegura que se pueda probar que la evidencia presentada al final del proceso es exactamente la misma que se recopiló inicialmente, sin ninguna modificación. MPD fue desarrollado siguiendo este riguroso marco técnico.",
-                "footer_text": "Materializador de Provas Digitais (MPD) - El software se proporciona de forma gratuita como un servicio a la excelencia de la investigación penal moderna."
+                "sec5_desc": "La aplicación realiza un barrido profundo de datos para delitos cibernéticos alojados en URL públicas.",
+                "sec5_li1": "<strong>IP Whois:</strong> Extrae bloques (CIDR), ASN, ISP y contactos de <em>Abuse Email</em>.",
+                "sec5_li2": "<strong>Mapeo Geográfico (Geo IP):</strong> Recopila coordenadas y extrae una impresión técnica del tablero.",
+                "sec5_li3": "<strong>Código Fuente Estricto:</strong> Guarda el esqueleto HTML en archivos de texto, fijando etiquetas y enlaces.",
+                "iso_title": "Cumplimiento de ISO/IEC 27037:2012",
+                "iso_text": "La norma establece pautas para la evidencia digital. El proceso prioriza la integridad a través de funciones hash, asegurando que se pueda probar que la evidencia es exactamente la recopilada inicialmente. MPD sigue este riguroso marco técnico.",
+                "footer_text": "SYS.LOG: Materializador de Pruebas Digitales -MPD - Proporcionado de forma gratuita como servicio a la investigación penal."
             }
         };
 
-        // Dicionário de imagens correspondentes a cada idioma
         const interfaceImages = {
             "pt": "Captura191730.png",
             "en": "Captura191730en.png",
@@ -452,7 +603,6 @@
         };
 
         function setLanguage(lang) {
-            // Atualiza o texto de todos os elementos com o atributo data-i18n
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang][key]) {
@@ -460,14 +610,11 @@
                 }
             });
 
-            // Troca a imagem da interface de acordo com o idioma selecionado
             document.getElementById('interface-img').src = interfaceImages[lang];
 
-            // Gerencia os botões ativos
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
             
-            // Muda a linguagem oficial na tag HTML para SEO dinâmico
             document.documentElement.lang = lang === 'en' ? 'en-US' : (lang === 'es' ? 'es-ES' : 'pt-BR');
         }
     </script>
