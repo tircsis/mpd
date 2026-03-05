@@ -7,7 +7,7 @@
     
     <title>MPD - Materializador de Prova Digital | Perícia e Forense Digital</title>
     <meta name="description" content="O MPD é uma ferramenta pericial ágil e offline para coleta, preservação e enclausuramento de provas digitais (prints e vídeos). Garante validade jurídica com Hash SHA-256 e conformidade com a ISO/IEC 27037:2012.">
-    <meta name="keywords" content="MPD, materializador de provas digitais, prova digital, perícia digital, cadeia de custódia, forense digital, ISO 27037, hash SHA-256, evidências digitais, direito digital, coleta de provas, captura de tela com validade jurídica, preservação de evidências, perícia criminal, investigação cibernética, gravação de tela forense, validade jurídica WhatsApp, STJ provas digitais, laudo pericial digital, autenticação de prints, enclausuramento digital, software forense offline, carimbo de tempo, timestamp pericial">
+    <meta name="keywords" content="MPD, materializador de provas digitais, prova digital, perícia digital, cadeia de custódia, forense digital, ISO 27037, hash SHA-256, evidências digitais, direito digital, coleta de provas, captura de tela com validade jurídica, preservação de evidências, perícia criminal, investigação cibernética, gravação de tela forense, validade jurídica WhatsApp, STJ provas digitais, laudo pericial digital, autenticação de prints, enclausuramento digital, software forense offline, carimbo de tempo, timestamp pericial, whois, osint, geoip">
     <meta name="author" content="Desenvolvedor do MPD">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://tircsis.github.io/mpd/">
@@ -168,6 +168,44 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
 
+        /* Estilos do Vídeo Thumbnail - Atualizado para ser 40% menor */
+        .video-wrapper {
+            position: relative;
+            display: inline-block;
+            max-width: 480px; /* Reduzido de 800px (800 * 0.6 = 480) */
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .video-wrapper:hover {
+            border-color: var(--danger-color); /* Fica vermelho estilo YouTube ao passar o mouse */
+            transform: scale(1.02);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(220, 38, 38, 0.85); /* Vermelho translúcido */
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: background 0.3s ease;
+        }
+
+        .video-wrapper:hover .play-button {
+            background: rgba(239, 68, 68, 1);
+        }
+
         .report-section {
             background-color: #171717;
             padding: 20px;
@@ -214,10 +252,26 @@
         <img src="LOGOIMAGE.jpeg" alt="Logotipo do MPD" class="logo">
         <h1 data-i18n="main_title">Materializador de Prova Digital (MPD)</h1>
         <p class="subtitle" data-i18n="subtitle">Ferramenta pericial ágil desenvolvida especificamente para viabilizar a coleta, preservação e o enclausuramento de provas digitais com fundamentação jurídica sólida.</p>
-        <a href="https://cutt.ly/HtWocn4G" class="download-btn" target="_blank" rel="noopener noreferrer" data-i18n="download_btn">Download do MPD v1.6</a>
+        <a href="https://cutt.ly/HtWocn4G" class="download-btn" target="_blank" rel="noopener noreferrer" data-i18n="download_btn">Download do MPD</a>
     </header>
 
     <div class="container">
+        
+        <div class="screenshot-container" style="margin-top: 10px; margin-bottom: 50px;">
+            <h2 data-i18n="video_title">Vídeo Tutorial de Uso</h2>
+            <p data-i18n="video_desc" style="color: var(--text-muted); margin-bottom: 20px;">Aprenda na prática como configurar e utilizar o MPD para materializar suas provas digitais.</p>
+            
+            <a href="https://youtu.be/MZtECGrD7R8" target="_blank" rel="noopener noreferrer" class="video-wrapper">
+                <img src="https://img.youtube.com/vi/MZtECGrD7R8/maxresdefault.jpg" alt="Miniatura do Vídeo Tutorial do MPD no YouTube" style="width: 100%; display: block;">
+                
+                <div class="play-button">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" style="margin-left: 5px;">
+                        <path d="M5 3l14 9-14 9V3z"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+
         <div class="grid">
             <div class="card">
                 <h2 data-i18n="sec1_title">Cadeia de Custódia e Segurança</h2>
@@ -242,7 +296,7 @@
 
         <div class="screenshot-container">
             <h2 data-i18n="sec3_title">Interface Simples e Direta</h2>
-            <img src="Captura191730.png" alt="Interface do MPD" class="screenshot">
+            <img src="Captura191730.png" alt="Interface do MPD" class="screenshot" id="interface-img">
         </div>
 
         <div class="card" style="margin-top: 40px;">
@@ -263,6 +317,19 @@
             </div>
         </div>
 
+        <div class="card" style="margin-top: 40px;">
+            <h2 data-i18n="sec5_title">Investigação de Infraestrutura (OSINT / Whois)</h2>
+            <p data-i18n="sec5_desc" style="color: var(--text-muted); margin-bottom: 20px;">A aplicação MPD realiza também a coleta de dados da página investigada fazendo uma varredura profunda de dados para crimes virtuais hospedados em URLs específicas públicas (páginas abertas web).</p>
+            <ul>
+                <li data-i18n="sec5_li1"><strong>Internet Protocol (IP) Whois:</strong> Extrai a malha da rede buscando blocos (CIDR), Sistema Autônomo (ASN), nome oficial da Empresa Provedora de Hospedagem (ISP) e especificamente os contatos de <em>Abuse Email</em> das empresas para o envio de representações de quebra de sigilo por ofício.</li>
+                <li data-i18n="sec5_li2"><strong>Mapeamento Geográfico (Dashboard Geo IP):</strong> Coleta as coordenadas (Latitude/Longitude) do provedor associadas pela API e abre momentaneamente um <em>Dashboard Geográfico (Mapa Gráfico)</em> na tela, que extrairá do seu próprio ambiente um novo print técnico mostrando o "Pino" da cidade-sede para fins ilustrativos da localização do registro.</li>
+                <li data-i18n="sec5_li3"><strong>Código Fonte Estrito:</strong> O MPD entra na página ignorando JavaScript visual dinâmico e salva todo o esqueleto bruto raiz HTML em arquivos de texto criptografados, fixando tags e links obscuros da página caso os criminosos tentem excluir futuramente.</li>
+            </ul>
+            <div class="screenshot-container" style="margin-top: 25px;">
+                <img src="dash_map_1772040835.png" alt="Dashboard Geo IP e OSINT do MPD" class="screenshot" style="border: 1px solid var(--primary-color);">
+            </div>
+        </div>
+
         <div class="iso-badge">
             <h3 style="color: var(--primary-color); margin-top: 0;" data-i18n="iso_title">Conformidade com a ISO/IEC 27037:2012</h3>
             <p style="text-align: left;" data-i18n="iso_text">A ISO/IEC 27037:2012 é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais. O processo definido pela norma prioriza a integridade da evidência. Através de técnicas como o uso de funções de hash, a norma assegura que se possa provar que a evidência apresentada ao final do processo é exatamente a mesma que foi coletada inicialmente, sem qualquer modificação. O MPD foi desenvolvido seguindo esse rigoroso arcabouço técnico.</p>
@@ -280,6 +347,8 @@
                 "main_title": "Materializador de Provas Digitais (MPD)",
                 "subtitle": "Ferramenta pericial ágil desenvolvida especificamente para viabilizar a coleta, preservação e o enclausuramento de provas digitais com fundamentação jurídica sólida.",
                 "download_btn": "Download do MPD v1.6",
+                "video_title": "Vídeo Tutorial de Uso",
+                "video_desc": "Aprenda na prática como configurar e utilizar o MPD para materializar suas provas digitais.",
                 "sec1_title": "Cadeia de Custódia e Segurança",
                 "sec1_li1": "Todo material coletado via MPD é assegurado com cadeias de Hash SHA-256 e timestamps.",
                 "sec1_li2": "Garante a não-repúdio, integridade e conformidade com resoluções do STJ em processos penais ou administrativos.",
@@ -298,6 +367,11 @@
                 "sec4_li4": "<strong>Relatório Técnico Oficial:</strong> O MPD monta uma estrutura lacrada offline e emite um Relatório Técnico Avançado assinado por Hashes em formato PDF.",
                 "sec4_desc": "<strong>Organização e Clareza:</strong> O relatório pericial final é gerado automaticamente em formato <strong>PDF</strong>. Todas as informações coletadas, carimbos de tempo, assinaturas Hash e as capturas de tela são consolidadas e organizadas de maneira estruturada e profissional, prontas para anexação aos autos do processo.",
                 "sec4_lang": "🌍 Suporte Multidioma: O aplicativo suporta os idiomas Português, Inglês e Espanhol, inclusive gerando o relatório técnico integralmente no idioma selecionado.",
+                "sec5_title": "Investigação de Infraestrutura (OSINT / Whois)",
+                "sec5_desc": "A aplicação MPD realiza também a coleta de dados da página investigada fazendo uma varredura profunda de dados para crimes virtuais hospedados em URLs específicas públicas (páginas abertas web).",
+                "sec5_li1": "<strong>Internet Protocol (IP) Whois:</strong> Extrai a malha da rede buscando blocos (CIDR), Sistema Autônomo (ASN), nome oficial da Empresa Provedora de Hospedagem (ISP) e especificamente os contatos de <em>Abuse Email</em> das empresas para o envio de representações de quebra de sigilo por ofício.",
+                "sec5_li2": "<strong>Mapeamento Geográfico (Dashboard Geo IP):</strong> Coleta as coordenadas (Latitude/Longitude) do provedor associadas pela API e abre momentaneamente um <em>Dashboard Geográfico (Mapa Gráfico)</em> na tela, que extrairá do seu próprio ambiente um novo print técnico mostrando o \"Pino\" da cidade-sede para fins ilustrativos da localização do registro.",
+                "sec5_li3": "<strong>Código Fonte Estrito:</strong> O MPD entra na página ignorando JavaScript visual dinâmico e salva todo o esqueleto bruto raiz HTML em arquivos de texto criptografados, fixando tags e links obscuros da página caso os criminosos tentem excluir futuramente.",
                 "iso_title": "Conformidade com a ISO/IEC 27037:2012",
                 "iso_text": "A ISO/IEC 27037:2012 é uma norma internacional essencial que estabelece diretrizes para a identificação, coleta, aquisição e preservação de evidências digitais. O processo definido pela norma prioriza a integridade da evidência. Através de técnicas como o uso de funções de hash, a norma assegura que se possa provar que a evidência apresentada ao final do processo é exatamente a mesma que foi coletada inicialmente, sem qualquer modificação. O MPD foi desenvolvido seguindo esse rigoroso arcabouço técnico.",
                 "footer_text": "Materializador de Provas Digitais (MPD) - O Software está concebido gratuitamente como prestação de serviço à excelência de investigação penal moderna."
@@ -306,6 +380,8 @@
                 "main_title": "Digital Evidence Materializer (MPD)",
                 "subtitle": "Agile forensic tool specifically developed to enable the collection, preservation, and sealing of digital evidence with solid legal grounding.",
                 "download_btn": "Download MPD v1.6",
+                "video_title": "Video Tutorial",
+                "video_desc": "Learn practically how to configure and use MPD to materialize your digital evidence.",
                 "sec1_title": "Chain of Custody and Security",
                 "sec1_li1": "All material collected via MPD is secured with SHA-256 Hash chains and timestamps.",
                 "sec1_li2": "Guarantees non-repudiation, integrity, and compliance with legal resolutions in criminal or administrative proceedings.",
@@ -324,6 +400,11 @@
                 "sec4_li4": "<strong>Official Technical Report:</strong> MPD creates an offline sealed structure and issues an Advanced Technical Report signed by Hashes in PDF format.",
                 "sec4_desc": "<strong>Organization and Clarity:</strong> The final forensic report is automatically generated in <strong>PDF</strong> format. All collected information, timestamps, Hash signatures, and screenshots are consolidated and structured professionally, ready to be attached to legal proceedings.",
                 "sec4_lang": "🌍 Multilingual Support: The application supports Portuguese, English, and Spanish, including generating the full technical report in the selected language.",
+                "sec5_title": "Infrastructure Investigation (OSINT / Whois)",
+                "sec5_desc": "The MPD application also collects data from the investigated page, conducting a deep data sweep for cybercrimes hosted on specific public URLs (open web pages).",
+                "sec5_li1": "<strong>Internet Protocol (IP) Whois:</strong> Extracts the network mesh searching for blocks (CIDR), Autonomous System (ASN), official name of the Hosting Provider Company (ISP), and specifically the <em>Abuse Email</em> contacts of the companies for sending official breach of confidentiality requests.",
+                "sec5_li2": "<strong>Geographic Mapping (Geo IP Dashboard):</strong> Collects the provider's coordinates (Latitude/Longitude) associated by the API and briefly opens a <em>Geographic Dashboard (Graphic Map)</em> on the screen, which extracts a new technical print from its own environment showing the \"Pin\" of the headquarters city for illustrative purposes of the registration location.",
+                "sec5_li3": "<strong>Strict Source Code:</strong> The MPD accesses the page ignoring dynamic visual JavaScript and saves the entire raw root HTML skeleton in encrypted text files, pinning obscure tags and links from the page in case criminals attempt to delete them later.",
                 "iso_title": "Compliance with ISO/IEC 27037:2012",
                 "iso_text": "ISO/IEC 27037:2012 is an essential international standard that establishes guidelines for the identification, collection, acquisition, and preservation of digital evidence. The process defined by the standard prioritizes evidence integrity. Through techniques such as hash functions, the standard ensures that the evidence presented at the end of the process can be proven to be exactly the same as initially collected, without any modification. MPD was developed following this rigorous technical framework.",
                 "footer_text": "Digital Evidence Materializer (MPD) - The software is provided free of charge as a service to modern criminal investigation excellence."
@@ -332,6 +413,8 @@
                 "main_title": "Materializador de Pruebas Digitales (MPD)",
                 "subtitle": "Herramienta forense ágil desarrollada específicamente para viabilizar la recopilación, preservación y encapsulamiento de pruebas digitales con sólida fundamentación jurídica.",
                 "download_btn": "Descargar MPD v1.6",
+                "video_title": "Video Tutorial de Uso",
+                "video_desc": "Aprenda en la práctica cómo configurar y utilizar el MPD para materializar suas provas digitais.",
                 "sec1_title": "Cadena de Custodia y Seguridad",
                 "sec1_li1": "Todo el material recopilado a través de MPD está asegurado con cadenas Hash SHA-256 y marcas de tiempo.",
                 "sec1_li2": "Garantiza el no repudio, la integridad y el cumplimiento de las resoluciones legales en procesos penales o administrativos.",
@@ -350,10 +433,22 @@
                 "sec4_li4": "<strong>Informe Técnico Oficial:</strong> MPD crea una estructura sellada offline y emite un Informe Técnico Avanzado firmado por Hashes en formato PDF.",
                 "sec4_desc": "<strong>Organización y Claridad:</strong> El informe forense final se genera automáticamente en formato <strong>PDF</strong>. Toda la información recopilada, marcas de tiempo, firmas Hash y capturas de pantalla se consolidan de manera estructurada y profesional, listas para anexarse a los expedientes judiciales.",
                 "sec4_lang": "🌍 Soporte Multilingüe: La aplicación soporta los idiomas Portugués, Inglés y Español, incluyendo la generación del informe técnico íntegramente en el idioma seleccionado.",
+                "sec5_title": "Investigación de Infraestructura (OSINT / Whois)",
+                "sec5_desc": "La aplicación MPD también realiza la recopilación de datos de la página investigada mediante un barrido profundo de datos para delitos cibernéticos alojados en URL públicas específicas (páginas web abiertas).",
+                "sec5_li1": "<strong>Internet Protocol (IP) Whois:</strong> Extrae la malla de red buscando blocs (CIDR), Sistema Autónomo (ASN), nombre oficial de la Empresa Proveedora de Alojamiento (ISP) y específicamente los contactos de <em>Abuse Email</em> de las empresas para el envío de representaciones de levantamiento de secreto por oficio.",
+                "sec5_li2": "<strong>Mapeo Geográfico (Dashboard Geo IP):</strong> Recopila las coordenadas (Latitud/Longitud) del proveedor asociadas por la API y abre momentáneamente un <em>Dashboard Geográfico (Mapa Gráfico)</em> en la pantalla, que extraerá de su propio entorno una nueva impresión técnica que muestra el \"Pin\" de la ciudad sede con fines ilustrativos de la ubicación del registro.",
+                "sec5_li3": "<strong>Código Fuente Estricto:</strong> El MPD ingresa a la página ignorando el JavaScript visual dinámico y guarda todo el esqueleto raíz HTML sin procesar en archivos de texto encriptados, fijando etiquetas y enlaces oscuros de la página en caso de que los delincuentes intenten eliminarlos en el futuro.",
                 "iso_title": "Cumplimiento de la norma ISO/IEC 27037:2012",
                 "iso_text": "La norma ISO/IEC 27037:2012 es un estándar internacional esencial que establece pautas para la identificación, recopilación, adquisición y preservación de evidencia digital. El proceso definido por la norma prioriza la integridad de la evidencia. A través de técnicas como las funciones hash, la norma asegura que se pueda probar que la evidencia presentada al final del proceso es exactamente la misma que se recopiló inicialmente, sin ninguna modificación. MPD fue desarrollado siguiendo este riguroso marco técnico.",
-                "footer_text": "Materializador de Pruebas Digitales (MPD) - El software se proporciona de forma gratuita como un servicio a la excelencia de la investigación penal moderna."
+                "footer_text": "Materializador de Provas Digitais (MPD) - El software se proporciona de forma gratuita como un servicio a la excelencia de la investigación penal moderna."
             }
+        };
+
+        // Dicionário de imagens correspondentes a cada idioma
+        const interfaceImages = {
+            "pt": "Captura191730.png",
+            "en": "Captura191730en.png",
+            "es": "Captura191730sp.png"
         };
 
         function setLanguage(lang) {
@@ -364,6 +459,9 @@
                     el.innerHTML = translations[lang][key];
                 }
             });
+
+            // Troca a imagem da interface de acordo com o idioma selecionado
+            document.getElementById('interface-img').src = interfaceImages[lang];
 
             // Gerencia os botões ativos
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
