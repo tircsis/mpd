@@ -2,7 +2,7 @@
   <img src="LOGOIMAGE.jpeg" alt="Logotipo do MPD" width="150">
 </p>
 
-<h1 align="center">Materializador de Provas Digitais (MPD)</h1>
+<h1 align="center">Materializador de Prova Digital (MPD)</h1>
 
 <p align="center">
   <strong>Aplicativo pericial rápido criado com o objetivo de permitir a obtenção, guarda e empacotamento de evidências eletrônicas com forte base legal.</strong>
